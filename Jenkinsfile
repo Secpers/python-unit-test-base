@@ -24,4 +24,12 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            archiveArtifacts 'htmlcov/*'
+            recordCoverage(tools: [[parser: 'COBERTURA', pattern: 'coverage.xml']],
+                id: 'COBERTURA', name: 'COBERTURA Coverage',
+                sourceCodeRetention: 'EVERY_BUILD')
+        }
+    }
 }
